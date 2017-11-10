@@ -1,0 +1,108 @@
+---
+ # - includes:
+      # - brain/say_el.yml
+      #   - brain/systemdate.yml
+      #  - brain/neurotransmitter.yml
+      #  - brain/uri.yml
+
+  - name: "geia"
+    signals:
+      - order: "Γεια σου. Τι κανεις;"
+    neurons:
+      - say:
+          message: "Γεια σου Νικολα καλά είμαι. Ευχαριστω για την ερωτηση. Εσυ πως εισαι; "
+      - neurotransmitter:
+          from_answer_link:
+            - synapse: "geia2"
+              answers:
+                - "καλα ειμαι και εγω"
+                - "καλα ειμαι"
+                - "ολα κομπλε"
+                - "την παλευω"
+            - synapse: "geia3"
+              answers:
+                - "ε οχι και τοσο καλα"
+                - "ετσι και ετσι"
+            - synapse: "geia4"
+              answers:
+                - "καλα μωρε"
+             - synapse: "geia5"
+              answers:
+                - "καλα"
+          default: "synapse4"
+
+  - name: "geia2"
+    signals:
+      - order: "geia2"
+    neurons:
+      - say:
+          message: "χαιρομαι για σενα"
+
+  - name: "geia3"
+    signals:
+      - order: "geia3"
+    neurons:
+      - say:
+          message: "γιατι τι εχεις;"
+      signals:
+      - order: "δυσκολη μερα"
+      neurons:
+      - say:
+          message: "α οκ. δεν μιλαω αλλο. αν με θες κατι μιλα μου! "
+    
+  - name: "geia4"
+    signals:
+      - order: "geia4"
+    neurons:
+      - say:
+          message: "χαιρομαι"
+          
+  - name: "geia5"
+    signals:
+      - order: "geia5"
+    neurons:
+      - say:
+          message: "χαιρομαι"
+
+  - name: "synapse4"
+    signals:
+      - order: "synapse4"
+    neurons:
+      - say:
+          message: "δεν σε ακουσα καλα. τι ειπες;"  
+            
+
+  - name: "my-app"
+    signals:
+      - order: "Πες μου για τον εαυτό σου"
+    neurons:
+      - say:
+          message:
+            - "Είμαι η Τρου και είμαι μια προσωπικη βοηθος με τεχνητή νοημοσύνη. ΚΑΙ ΝΑΙ ΜΙΛΑΩ ΕΛΛΗΝΙΚΑ"
+
+  - name: "my-app2"
+    signals:
+      - order: "που βασίζεται η τεχνολογία σου"
+    neurons:
+      - say:
+          message:
+            - "Η τεχνολογία μου μεταξύ άλλων, βασίζεται στις λογικές συνάψεις μεταξύ ερωτήσεων και απαντήσεων."
+
+  - name: "stop-alexandra"
+    signals:
+      - order: "σε αφήνω"
+    neurons:
+      - say:
+          message: "γειά σου! για ότι χρειαστείς μίλα μου!"
+      - kill_switch
+
+  - name: "default-synapse"
+    signals:
+      - order: "default-synapse"
+    neurons:
+      - say:
+          message:
+            - "Δεν κατάλαβα"
+            - "δεν σε ακουσα καλα"
+            - "Επαναλαβε σε παρακαλω"
+            - "ξαναπες τι ειπες, δεν σε ακουσα"
